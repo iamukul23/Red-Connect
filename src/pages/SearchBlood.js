@@ -84,7 +84,9 @@ const SearchBlood = () => {
       });
       
       if (response.status === 200) {
-        setDonors(response.data.donors || []);
+        // Server returns result.rows directly, not wrapped in donors property
+        setDonors(response.data || []);
+        console.log('Search results:', response.data);
       }
     } catch (error) {
       console.error('Search error:', error);
@@ -105,7 +107,7 @@ const SearchBlood = () => {
 
   const handleContact = (donor) => {
     // In a real app, this would open a contact modal or redirect to a contact form
-    alert(`Contacting ${donor.name} at ${donor.phone}`);
+    alert(`Contacting ${donor.fullname} at ${donor.mobileno}`);
   };
 
   return (
@@ -248,22 +250,22 @@ const SearchBlood = () => {
                         <div className="flex items-start justify-between mb-4">
                           <div>
                             <h3 className="text-lg font-semibold text-gray-900">
-                              {donor.name}
+                              {donor.fullname}
                             </h3>
                             <div className="flex items-center mt-1">
                               <span className={`inline-block w-2 h-2 rounded-full mr-2 ${
-                                donor.available ? 'bg-green-500' : 'bg-gray-400'
+                                donor.is_available ? 'bg-green-500' : 'bg-gray-400'
                               }`}></span>
                               <span className={`text-sm ${
-                                donor.available ? 'text-green-600' : 'text-gray-500'
+                                donor.is_available ? 'text-green-600' : 'text-gray-500'
                               }`}>
-                                {donor.available ? 'Available' : 'Not Available'}
+                                {donor.is_available ? 'Available' : 'Not Available'}
                               </span>
                             </div>
                           </div>
                           <div className="text-center">
                             <div className="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold">
-                              {donor.bloodGroup}
+                              {donor.blood_group}
                             </div>
                           </div>
                         </div>
@@ -271,27 +273,29 @@ const SearchBlood = () => {
                         <div className="space-y-2 mb-4">
                           <div className="flex items-center text-gray-600">
                             <MapPinIcon className="w-4 h-4 mr-2" />
-                            <span className="text-sm">{donor.location}</span>
+                            <span className="text-sm">{donor.address}</span>
                           </div>
                           <div className="flex items-center text-gray-600">
                             <PhoneIcon className="w-4 h-4 mr-2" />
-                            <span className="text-sm">{donor.phone}</span>
+                            <span className="text-sm">{donor.mobileno}</span>
                           </div>
-                          <div className="text-sm text-gray-500">
-                            Last donation: {new Date(donor.lastDonation).toLocaleDateString()}
-                          </div>
+                          {donor.last_donation_date && (
+                            <div className="text-sm text-gray-500">
+                              Last donation: {new Date(donor.last_donation_date).toLocaleDateString()}
+                            </div>
+                          )}
                         </div>
 
                         <button
                           onClick={() => handleContact(donor)}
-                          disabled={!donor.available}
+                          disabled={!donor.is_available}
                           className={`w-full py-2 px-4 rounded-lg font-medium transition-colors duration-200 ${
-                            donor.available
+                            donor.is_available
                               ? 'bg-primary-600 hover:bg-primary-700 text-white'
                               : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                           }`}
                         >
-                          {donor.available ? 'Contact Donor' : 'Unavailable'}
+                          {donor.is_available ? 'Contact Donor' : 'Unavailable'}
                         </button>
                       </motion.div>
                     ))}
