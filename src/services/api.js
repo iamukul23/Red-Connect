@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-// Set base URL for API calls - Render backend URL
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
 
-// Create axios instance
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -11,7 +9,6 @@ const api = axios.create({
   },
 });
 
-// Add request interceptor to include auth token
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('admin_token');
@@ -25,7 +22,6 @@ api.interceptors.request.use(
   }
 );
 
-// Add response interceptor to handle token expiration
 api.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -38,7 +34,6 @@ api.interceptors.response.use(
   }
 );
 
-// API endpoints
 export const authAPI = {
   login: (credentials) => api.post('/admin/login', credentials),
 };

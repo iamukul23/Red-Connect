@@ -59,8 +59,6 @@ const ContactUs = () => {
       
       if (response.status === 201) {
         setSubmitSuccess(true);
-        
-        // Reset form
         setFormData({
           name: '',
           email: '',
@@ -72,7 +70,6 @@ const ContactUs = () => {
     } catch (error) {
       console.error('Submission error:', error);
       
-      // Show user-friendly error message
       if (error.response?.data?.message) {
         alert(`Error: ${error.response.data.message}`);
       } else {
@@ -132,7 +129,6 @@ const ContactUs = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Contact Information */}
             <div className="lg:col-span-1">
               <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
                 <h2 className="text-xl font-bold text-gray-900 mb-6">
@@ -168,7 +164,6 @@ const ContactUs = () => {
                 </div>
               </div>
 
-              {/* Emergency Banner */}
               <div className="bg-red-50 border border-red-200 rounded-lg p-4">
                 <div className="flex items-center mb-3">
                   <div className="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center mr-3">
@@ -188,7 +183,6 @@ const ContactUs = () => {
               </div>
             </div>
 
-            {/* Contact Form */}
             <div className="lg:col-span-2">
               <div className="bg-white rounded-lg shadow-lg p-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">
@@ -303,7 +297,6 @@ const ContactUs = () => {
             </div>
           </div>
 
-          {/* FAQ Section */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}

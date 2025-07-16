@@ -24,7 +24,6 @@ const SearchBlood = () => {
     { id: 8, name: 'O-' },
   ];
 
-  // Mock donor data
   const mockDonors = [
     {
       id: 1,
@@ -98,7 +97,6 @@ const SearchBlood = () => {
         alert('Failed to search for donors. Please check your connection and try again.');
       }
       
-      // Set empty results on error
       setDonors([]);
     } finally {
       setIsSearching(false);
@@ -106,7 +104,6 @@ const SearchBlood = () => {
   };
 
   const handleContact = (donor) => {
-    // In a real app, this would open a contact modal or redirect to a contact form
     alert(`Contacting ${donor.fullname} at ${donor.mobileno}`);
   };
 
