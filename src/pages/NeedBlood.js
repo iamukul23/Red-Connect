@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { bloodRequestsAPI } from '../services/api';
 import { PhoneIcon, ClockIcon, MapPinIcon, HeartIcon } from '@heroicons/react/24/outline';
 
 const NeedBlood = () => {
@@ -48,15 +49,9 @@ const NeedBlood = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/blood-requests', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
+      const response = await bloodRequestsAPI.create(formData);
+      
+      if (response.status === 201) {
         setSubmitSuccess(true);
         
         // Reset form
@@ -71,12 +66,16 @@ const NeedBlood = () => {
           urgencyLevel: '',
           additionalInfo: '',
         });
-      } else {
-        const errorData = await response.json();
-        console.error('Submission failed:', errorData.message);
       }
     } catch (error) {
       console.error('Submission error:', error);
+      
+      // Show user-friendly error message
+      if (error.response?.data?.message) {
+        alert(`Error: ${error.response.data.message}`);
+      } else {
+        alert('Failed to submit blood request. Please check your connection and try again.');
+      }
     } finally {
       setIsSubmitting(false);
     }

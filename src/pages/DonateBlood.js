@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { donorsAPI } from '../services/api';
 
 const DonateBlood = () => {
   const [formData, setFormData] = useState({
@@ -91,15 +92,9 @@ const DonateBlood = () => {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('/api/donors', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
+      const response = await donorsAPI.create(formData);
+      
+      if (response.status === 201) {
         setSubmitSuccess(true);
         
         // Reset form
@@ -112,14 +107,16 @@ const DonateBlood = () => {
           bloodGroup: '',
           address: '',
         });
-      } else {
-        const errorData = await response.json();
-        console.error('Submission failed:', errorData.message);
-        // You could show an error toast here
       }
     } catch (error) {
       console.error('Submission error:', error);
-      // You could show an error toast here
+      
+      // Show user-friendly error message
+      if (error.response?.data?.message) {
+        alert(`Error: ${error.response.data.message}`);
+      } else {
+        alert('Failed to submit registration. Please check your connection and try again.');
+      }
     } finally {
       setIsSubmitting(false);
     }

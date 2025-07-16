@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import { authAPI } from '../services/api';
 
 const AuthContext = createContext();
 
@@ -18,9 +18,6 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem('admin_token');
     if (token) {
-      // Set axios default header
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      
       // Verify token with backend
       verifyToken(token);
     } else {
@@ -45,13 +42,12 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post('/api/admin/login', { email, password });
+      const response = await authAPI.login({ email, password });
       const { token, user } = response.data;
       
       localStorage.setItem('admin_token', token);
       localStorage.setItem('admin_user', JSON.stringify(user));
       
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       setUser(user);
       
       return { success: true };
@@ -66,7 +62,6 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem('admin_token');
     localStorage.removeItem('admin_user');
-    delete axios.defaults.headers.common['Authorization'];
     setUser(null);
   };
 

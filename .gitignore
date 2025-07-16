@@ -32,3 +32,4 @@ yarn-error.log*
 # OS
 Thumbs.db
 *.log
+DATABASE_SETUP_GUIDE.md

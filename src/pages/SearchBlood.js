@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { MagnifyingGlassIcon, PhoneIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import { donorsAPI } from '../services/api';
 
 const SearchBlood = () => {
   const [searchData, setSearchData] = useState({
@@ -77,30 +78,26 @@ const SearchBlood = () => {
     setHasSearched(true);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const response = await donorsAPI.search({
+        bloodGroup: searchData.bloodGroup,
+        location: searchData.location
+      });
       
-      // Filter mock data based on search criteria
-      let filteredDonors = mockDonors;
-      
-      if (searchData.bloodGroup) {
-        const selectedBloodGroup = bloodGroups.find(bg => bg.id === parseInt(searchData.bloodGroup));
-        if (selectedBloodGroup) {
-          filteredDonors = filteredDonors.filter(donor => 
-            donor.bloodGroup === selectedBloodGroup.name
-          );
-        }
+      if (response.status === 200) {
+        setDonors(response.data.donors || []);
       }
-      
-      if (searchData.location) {
-        filteredDonors = filteredDonors.filter(donor => 
-          donor.location.toLowerCase().includes(searchData.location.toLowerCase())
-        );
-      }
-      
-      setDonors(filteredDonors);
     } catch (error) {
       console.error('Search error:', error);
+      
+      // Show user-friendly error message
+      if (error.response?.data?.message) {
+        alert(`Search Error: ${error.response.data.message}`);
+      } else {
+        alert('Failed to search for donors. Please check your connection and try again.');
+      }
+      
+      // Set empty results on error
+      setDonors([]);
     } finally {
       setIsSearching(false);
     }

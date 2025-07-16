@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { PhoneIcon, MapPinIcon, EnvelopeIcon, ClockIcon } from '@heroicons/react/24/outline';
+import { contactAPI } from '../services/api';
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -54,22 +55,29 @@ const ContactUs = () => {
     setIsSubmitting(true);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const response = await contactAPI.create(formData);
       
-      console.log('Contact form submitted:', formData);
-      setSubmitSuccess(true);
-      
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: '',
-      });
+      if (response.status === 201) {
+        setSubmitSuccess(true);
+        
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: '',
+        });
+      }
     } catch (error) {
       console.error('Submission error:', error);
+      
+      // Show user-friendly error message
+      if (error.response?.data?.message) {
+        alert(`Error: ${error.response.data.message}`);
+      } else {
+        alert('Failed to submit contact form. Please check your connection and try again.');
+      }
     } finally {
       setIsSubmitting(false);
     }
