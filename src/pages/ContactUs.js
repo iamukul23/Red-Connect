@@ -19,7 +19,7 @@ const ContactUs = () => {
     {
       icon: PhoneIcon,
       title: "Emergency Helpline",
-      details: ["+1-800-BLOOD-NOW", "+1-800-256-6366"],
+      details: ["+1-800-BLOOD-NOW", "+1-800-123-4567"],
       description: "Available 24/7 for urgent blood requirements"
     },
     {
@@ -31,7 +31,7 @@ const ContactUs = () => {
     {
       icon: MapPinIcon,
       title: "Office Address",
-      details: ["123 Healthcare Drive", "Medical District, NY 10001"],
+      details: ["123 Healthcare Drive", "Medical District"],
       description: "Visit us during business hours"
     },
     {

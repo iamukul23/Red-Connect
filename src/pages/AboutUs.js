@@ -36,8 +36,6 @@ const AboutUs = () => {
   ];
 
   const stats = [
-    { number: "10,000+", label: "Lives Saved" },
-    { number: "5,000+", label: "Active Donors" },
     { number: "50+", label: "Partner Hospitals" },
     { number: "24/7", label: "Emergency Support" }
   ];
@@ -71,10 +69,6 @@ const AboutUs = () => {
                   To create a seamless, technology-driven platform that connects blood donors with recipients, 
                   ensuring that no life is lost due to blood shortage. We believe that every person has the 
                   potential to be a hero, and we're here to make that heroism accessible and impactful.
-                </p>
-                <p className="text-gray-600">
-                  Founded in 2025, RedConnect has revolutionized how blood donation works by eliminating barriers 
-                  and creating direct connections between those who can give and those who need to receive.
                 </p>
               </div>
               <div className="relative">
@@ -183,23 +177,16 @@ const AboutUs = () => {
             </h2>
             <div className="max-w-4xl mx-auto">
               <p className="text-gray-600 mb-4">
-                RedConnect was born out of a personal experience. When our founder's child needed an emergency blood 
-                transfusion, the traditional blood bank system proved to be slow and inefficient. Hours were 
-                spent trying to locate compatible donors, and valuable time was lost.
+                RedConnect was built to solve a critical problem in healthcare: the lack of a fast, reliable, and efficient way to connect blood donors with recipients.
               </p>
               <p className="text-gray-600 mb-4">
-                This experience highlighted the critical need for a more efficient, technology-driven approach 
-                to blood donation management. We realized that there were many willing donors in the community, 
-                but no effective way to connect them with those in need quickly.
+                Traditional blood donation systems often involve delays, outdated databases, and poor communication channels. RedConnect uses modern web technologies to streamline this process — enabling real-time donor discovery, emergency request handling, and centralized management through an intuitive platform.
               </p>
               <p className="text-gray-600 mb-4">
-                Today, RedConnect serves as a bridge between donors and recipients, using modern technology to save 
-                precious time and ultimately, precious lives. Our platform has facilitated thousands of 
-                successful blood donations and continues to grow our community of life-savers every day.
+                With features like advanced search by location and blood group, emergency request submission, and a full admin dashboard for analytics and donor management, RedConnect aims to make blood donation more accessible, transparent, and effective.
               </p>
               <p className="text-gray-600">
-                We're not just a blood donation platform – we're a community of heroes working together to 
-                ensure that no one suffers due to blood shortage.
+               We're not just a tool — we're building a connected network of life-savers.
               </p>
             </div>
           </div>
