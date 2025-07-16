@@ -194,64 +194,19 @@ Key tables include:
 
 ## 🚀 Deployment
 
-### Frontend Deployment
-```bash
-npm run build
-# Deploy the build folder to your hosting service
-```
+### Production Architecture
+- **Frontend**: Vercel (React app)
+- **Backend**: Render (Node.js/Express API)  
+- **Database**: Supabase (PostgreSQL)
 
-### Backend Deployment
-1. Set up PostgreSQL database on your server
-2. Configure environment variables
-3. Deploy the server code
-4. Set up process manager (PM2 recommended)
+### Quick Deploy
+1. **Database**: Create Supabase project and import `database/schema.sql`
+2. **Backend**: Deploy `server/` folder to Render
+3. **Frontend**: Deploy to Vercel with `REACT_APP_API_URL` environment variable
 
-### Environment Variables
-```env
-DB_HOST=your_db_host
-DB_PORT=5432
-DB_NAME=redconnect_db
-DB_USER=your_db_user
-DB_PASSWORD=your_db_password
-JWT_SECRET=your_jwt_secret
-PORT=5000
-NODE_ENV=production
-ADMIN_EMAIL=your_admin_email
-ADMIN_PASSWORD=your_admin_password
-```
+See detailed instructions in [`DEPLOYMENT.md`](./DEPLOYMENT.md)
 
-## 🤝 Contributing
-
-We welcome contributions to improve RedConnect! Please feel free to submit issues and enhancement requests.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-
-## 👨‍💻 About the Developer
-
-**Sarthak Routray** - Founder & CEO  
-Passionate about leveraging technology to save lives and create meaningful connections between donors and recipients.
-
-## 🙏 Acknowledgments
-
-- Built with Create React App
-- Icons by Heroicons
-- Animations by Framer Motion
-- Styling by Tailwind CSS
-- Database powered by PostgreSQL
-
-## 📞 Support
-
-For support or questions, please contact:
-- **Email**: support@redconnect.org
-- **Emergency Helpline**: +1-800-BLOOD-NOW
-- **Admin Panel**: http://localhost:3000/admin/login
-
-## 🔧 Development
+## 🛠 Development Setup
 
 ### Setting up Development Environment
 1. Follow installation instructions above
