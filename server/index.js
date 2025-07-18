@@ -119,11 +119,21 @@ app.post('/api/donors', async (req, res) => {
     const { fullname, mobileno, emailid, age, gender, bloodGroup, address, user_agent } = req.body;
     
     // Get the client's IP address
-    const clientIP = req.headers['x-forwarded-for'] || 
-                     req.headers['x-real-ip'] || 
-                     req.connection.remoteAddress || 
-                     req.socket.remoteAddress ||
-                     (req.connection.socket ? req.connection.socket.remoteAddress : null);
+    let clientIP = req.headers['x-forwarded-for'] || 
+                   req.headers['x-real-ip'] || 
+                   req.connection.remoteAddress || 
+                   req.socket.remoteAddress ||
+                   (req.connection.socket ? req.connection.socket.remoteAddress : null);
+    
+    // Handle comma-separated IP addresses (from proxies like Cloudflare)
+    if (clientIP && clientIP.includes(',')) {
+      clientIP = clientIP.split(',')[0].trim();
+    }
+    
+    // Remove IPv6 prefix if present
+    if (clientIP && clientIP.startsWith('::ffff:')) {
+      clientIP = clientIP.substring(7);
+    }
     
     const query = `
       INSERT INTO donors (fullname, mobileno, emailid, age, gender, blood_group_id, address, ip_address, user_agent, created_at)
@@ -215,11 +225,21 @@ app.post('/api/blood-requests', async (req, res) => {
     } = req.body;
     
     // Get the client's IP address
-    const clientIP = req.headers['x-forwarded-for'] || 
-                     req.headers['x-real-ip'] || 
-                     req.connection.remoteAddress || 
-                     req.socket.remoteAddress ||
-                     (req.connection.socket ? req.connection.socket.remoteAddress : null);
+    let clientIP = req.headers['x-forwarded-for'] || 
+                   req.headers['x-real-ip'] || 
+                   req.connection.remoteAddress || 
+                   req.socket.remoteAddress ||
+                   (req.connection.socket ? req.connection.socket.remoteAddress : null);
+    
+    // Handle comma-separated IP addresses (from proxies like Cloudflare)
+    if (clientIP && clientIP.includes(',')) {
+      clientIP = clientIP.split(',')[0].trim();
+    }
+    
+    // Remove IPv6 prefix if present
+    if (clientIP && clientIP.startsWith('::ffff:')) {
+      clientIP = clientIP.substring(7);
+    }
     
     const query = `
       INSERT INTO blood_requests (
@@ -318,11 +338,21 @@ app.post('/api/contact', async (req, res) => {
     const { name, email, phone, subject, message, user_agent } = req.body;
     
     // Get the client's IP address
-    const clientIP = req.headers['x-forwarded-for'] || 
-                     req.headers['x-real-ip'] || 
-                     req.connection.remoteAddress || 
-                     req.socket.remoteAddress ||
-                     (req.connection.socket ? req.connection.socket.remoteAddress : null);
+    let clientIP = req.headers['x-forwarded-for'] || 
+                   req.headers['x-real-ip'] || 
+                   req.connection.remoteAddress || 
+                   req.socket.remoteAddress ||
+                   (req.connection.socket ? req.connection.socket.remoteAddress : null);
+    
+    // Handle comma-separated IP addresses (from proxies like Cloudflare)
+    if (clientIP && clientIP.includes(',')) {
+      clientIP = clientIP.split(',')[0].trim();
+    }
+    
+    // Remove IPv6 prefix if present
+    if (clientIP && clientIP.startsWith('::ffff:')) {
+      clientIP = clientIP.substring(7);
+    }
     
     const query = `
       INSERT INTO contact_messages (name, email, phone, subject, message, ip_address, user_agent, created_at)
