@@ -9,8 +9,8 @@ import {
   UserGroupIcon,
   HeartIcon,
   ChatBubbleLeftRightIcon,
-  TrendingUpIcon,
-  TrendingDownIcon,
+  ArrowTrendingUpIcon,
+  ArrowTrendingDownIcon,
   DocumentChartBarIcon
 } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
@@ -70,7 +70,7 @@ const Reports = () => {
             <p className={`text-sm flex items-center ${
               change.startsWith('+') ? 'text-green-600' : 'text-red-600'
             }`}>
-              {change.startsWith('+') ? <TrendingUpIcon className="h-4 w-4 mr-1" /> : <TrendingDownIcon className="h-4 w-4 mr-1" />}
+              {change.startsWith('+') ? <ArrowTrendingUpIcon className="h-4 w-4 mr-1" /> : <ArrowTrendingDownIcon className="h-4 w-4 mr-1" />}
               {change} from last period
             </p>
           )}
@@ -264,7 +264,7 @@ const Reports = () => {
             title="Successful Donations"
             value={reportData?.successfulDonations || 0}
             change={reportData?.donationGrowth}
-            icon={TrendingUpIcon}
+            icon={ArrowTrendingUpIcon}
             color="bg-green-500"
           />
           <StatCard
