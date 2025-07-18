@@ -14,7 +14,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import AdminLogin from './pages/admin/AdminLogin';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import toast, { Toaster } from 'react-hot-toast';
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from '@vercel/analytics';
 
 function App() {
   return (

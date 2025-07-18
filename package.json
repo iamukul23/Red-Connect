@@ -19,7 +19,7 @@
     "dotenv": "^16.0.3",
     "react-table": "^7.8.0",
     "react-hot-toast": "^2.4.1",
-    "@vercel/analytics": "^1.1.1"
+    "@vercel/analytics": "^0.1.11"
   },
   "devDependencies": {
     "tailwindcss": "^3.2.7",
@@ -38,7 +38,7 @@
     "server": "node server/index.js",
     "server:dev": "nodemon server/index.js",
     "dev": "concurrently \"npm run server:dev\" \"npm start\"",
-    "render-build": "npm install && npm run build"
+    "render-build": "npm install --legacy-peer-deps && npm run build"
   },
   "eslintConfig": {
     "extends": [
