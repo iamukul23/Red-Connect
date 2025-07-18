@@ -13,6 +13,10 @@ import Footer from './components/Footer';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminLogin from './pages/admin/AdminLogin';
 import AdminDashboard from './pages/admin/AdminDashboard';
+import Donors from './pages/admin/Donors';
+import BloodRequests from './pages/admin/BloodRequests';
+import Messages from './pages/admin/Messages';
+import Reports from './pages/admin/Reports';
 import toast, { Toaster } from 'react-hot-toast';
 import { inject } from '@vercel/analytics';
 
@@ -34,7 +38,10 @@ function App() {
                 <ProtectedRoute>
                   <Routes>
                     <Route path="dashboard" element={<AdminDashboard />} />
-                    {/* Add more admin routes here */}
+                    <Route path="donors" element={<Donors />} />
+                    <Route path="blood-requests" element={<BloodRequests />} />
+                    <Route path="messages" element={<Messages />} />
+                    <Route path="reports" element={<Reports />} />
                   </Routes>
                 </ProtectedRoute>
               } 

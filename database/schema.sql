@@ -28,6 +28,9 @@ CREATE TABLE donors (
     address TEXT NOT NULL,
     is_available BOOLEAN DEFAULT true,
     last_donation_date DATE,
+    ip_address INET,
+    user_agent TEXT,
+    registration_source VARCHAR(50) DEFAULT 'web',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -45,6 +48,8 @@ CREATE TABLE blood_requests (
     urgency_level VARCHAR(20) NOT NULL CHECK (urgency_level IN ('immediate', 'urgent', 'normal')),
     additional_info TEXT,
     status VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'in_progress', 'fulfilled', 'cancelled')),
+    ip_address INET,
+    user_agent TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -58,6 +63,8 @@ CREATE TABLE contact_messages (
     subject VARCHAR(200) NOT NULL,
     message TEXT NOT NULL,
     is_read BOOLEAN DEFAULT false,
+    ip_address INET,
+    user_agent TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

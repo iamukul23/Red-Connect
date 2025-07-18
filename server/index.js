@@ -116,15 +116,22 @@ app.post('/api/admin/login', async (req, res) => {
 // Submit blood donor registration
 app.post('/api/donors', async (req, res) => {
   try {
-    const { fullname, mobileno, emailid, age, gender, bloodGroup, address } = req.body;
+    const { fullname, mobileno, emailid, age, gender, bloodGroup, address, user_agent } = req.body;
+    
+    // Get the client's IP address
+    const clientIP = req.headers['x-forwarded-for'] || 
+                     req.headers['x-real-ip'] || 
+                     req.connection.remoteAddress || 
+                     req.socket.remoteAddress ||
+                     (req.connection.socket ? req.connection.socket.remoteAddress : null);
     
     const query = `
-      INSERT INTO donors (fullname, mobileno, emailid, age, gender, blood_group_id, address, created_at)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, NOW())
+      INSERT INTO donors (fullname, mobileno, emailid, age, gender, blood_group_id, address, ip_address, user_agent, created_at)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, NOW())
       RETURNING *
     `;
     
-    const values = [fullname, mobileno, emailid, age, gender, bloodGroup, address];
+    const values = [fullname, mobileno, emailid, age, gender, bloodGroup, address, clientIP, user_agent];
     const result = await pool.query(query, values);
     
     res.status(201).json({
@@ -203,23 +210,31 @@ app.post('/api/blood-requests', async (req, res) => {
       contactPerson,
       phoneNumber,
       urgencyLevel,
-      additionalInfo
+      additionalInfo,
+      user_agent
     } = req.body;
+    
+    // Get the client's IP address
+    const clientIP = req.headers['x-forwarded-for'] || 
+                     req.headers['x-real-ip'] || 
+                     req.connection.remoteAddress || 
+                     req.socket.remoteAddress ||
+                     (req.connection.socket ? req.connection.socket.remoteAddress : null);
     
     const query = `
       INSERT INTO blood_requests (
         patient_name, blood_group, units_required, hospital_name, 
         hospital_address, contact_person, phone_number, urgency_level, 
-        additional_info, status, created_at
+        additional_info, ip_address, user_agent, status, created_at
       )
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, 'pending', NOW())
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, 'pending', NOW())
       RETURNING *
     `;
     
     const values = [
       patientName, bloodGroup, unitsRequired, hospitalName,
       hospitalAddress, contactPerson, phoneNumber, urgencyLevel,
-      additionalInfo
+      additionalInfo, clientIP, user_agent
     ];
     
     const result = await pool.query(query, values);
@@ -300,15 +315,22 @@ app.get('/api/blood-groups', async (req, res) => {
 // Submit contact form
 app.post('/api/contact', async (req, res) => {
   try {
-    const { name, email, phone, subject, message } = req.body;
+    const { name, email, phone, subject, message, user_agent } = req.body;
+    
+    // Get the client's IP address
+    const clientIP = req.headers['x-forwarded-for'] || 
+                     req.headers['x-real-ip'] || 
+                     req.connection.remoteAddress || 
+                     req.socket.remoteAddress ||
+                     (req.connection.socket ? req.connection.socket.remoteAddress : null);
     
     const query = `
-      INSERT INTO contact_messages (name, email, phone, subject, message, created_at)
-      VALUES ($1, $2, $3, $4, $5, NOW())
+      INSERT INTO contact_messages (name, email, phone, subject, message, ip_address, user_agent, created_at)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, NOW())
       RETURNING *
     `;
     
-    const values = [name, email, phone, subject, message];
+    const values = [name, email, phone, subject, message, clientIP, user_agent];
     const result = await pool.query(query, values);
     
     res.status(201).json({
