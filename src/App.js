@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import Navbar from './components/Navbar';
@@ -14,9 +14,13 @@ import ProtectedRoute from './components/ProtectedRoute';
 import AdminLogin from './pages/admin/AdminLogin';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import toast, { Toaster } from 'react-hot-toast';
-import { Analytics } from '@vercel/analytics';
+import { inject } from '@vercel/analytics';
 
 function App() {
+  useEffect(() => {
+    inject();
+  }, []);
+
   return (
     <AuthProvider>
       <Router>
@@ -56,7 +60,6 @@ function App() {
             } />
           </Routes>
           <Toaster position="top-right" />
-          <Analytics />
         </div>
       </Router>
     </AuthProvider>
