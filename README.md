@@ -223,4 +223,4 @@ See detailed instructions in [`DEPLOYMENT.md`](./DEPLOYMENT.md)
 
 **Save Lives. Donate Blood. Be a Hero.** ❤️
 
-*Built with ❤️ by Sarthak Routray to make blood donation accessible and efficient for everyone.*
+*Built with ❤️ by Mukul to make blood donation accessible and efficient for everyone.*
