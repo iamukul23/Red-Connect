@@ -2,7 +2,7 @@
 
 A modern, full-stack Blood Donation Management System that connects donors to recipients directly through an intuitive web platform with comprehensive admin controls.
 
-## 🩸 About
+### 🩸 About
 
 RedConnect is a comprehensive blood donation management system built with modern web technologies to streamline the process of connecting blood donors with those in need. Our platform eliminates traditional barriers and creates direct connections between life-savers and life-receivers, while providing powerful administrative tools for management.
 
