@@ -50,7 +50,7 @@ const AdminDashboard = () => {
       title: 'Pending Requests',
       value: stats?.pendingRequests || 0,
       icon: ClockIcon,
-      color: 'bg-yellow-500',
+      color: 'bg-yellow-600',
       change: '-5%',
     },
     {
