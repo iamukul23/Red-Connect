@@ -212,7 +212,7 @@ See detailed instructions in [`DEPLOYMENT.md`](./DEPLOYMENT.md)
 1. Follow installation instructions above
 2. Set `NODE_ENV=development` in `.env`
 3. Use `npm run dev` for hot reloading
-4. Backend runs on port 5000, frontend on port 3000
+4. Backend runs on port 5000, frontend on port 3000.
 
 ### Database Development
 - Use `npm run dev:server` for auto-restart on changes
