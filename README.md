@@ -9,7 +9,7 @@ RedConnect is a comprehensive blood donation management system built with modern
 ## ✨ Features
 
 ### 🌐 Public Features
-- **🏠 Modern Home Page**: Beautiful hero section with carousel showcasing blood donation impact
+- **🏠 Modern Home Page**: Beautiful hero section with carousel showcasing blood donation impact.
 - **💉 Donor Registration**: Easy-to-use form for registering as a blood donor
 - **🔍 Search Donors**: Advanced search functionality to find donors by blood group and location
 - **🆘 Emergency Requests**: Quick blood requirement submission for urgent needs
